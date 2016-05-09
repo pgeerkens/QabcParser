@@ -20,58 +20,57 @@ namespace PGSoftwareSolutionsInc.Qabc {
         public QabcGrammar() : base(false) {
             #region 1-Terminals
             #region Directions
-            var bar             = new RegexBasedTerminalX("bar", @":?[|][1-9:\]]?");
-            var mode            = new MyKeyTerm("M", "mode");
-            var modeStyle       = new RegexEnumTerm<Style>(@"[NLS]");
-            var length          = new MyKeyTerm("L", "length");
-            var octave          = new MyKeyTerm("O", "octave");
-            var tempo           = new MyKeyTerm("T", "tempo");
-            var integer         = new MusicIntegerLiteral<Byte>("integer");
-            var shift           = new RegexEnumTerm<OctaveShift>(@"O?[<>]",
-                                            s => OctaveShift.Up.FromString(s));
-            var modePlay        = new RegexBasedTerminalX("modePlay", @"M[BF]");
+            var Bar             = new RegexBasedTerminalX("bar", @":?[|][1-9:\]]?");
+            var Mode            = new MyKeyTerm("M", "mode");
+            var ModeStyle       = new RegexEnumTerm<Style>(@"[NLS]");
+            var Length          = new MyKeyTerm("L", "length");
+            var Octave          = new MyKeyTerm("O", "octave");
+            var Tempo           = new MyKeyTerm("T", "tempo");
+            var Integer         = new MusicIntegerLiteral<Byte>("integer");
+            var Shift           = new RegexEnumTerm<OctaveShift>(@"O?[<>]",
+                                            s => Music.OctaveShift.Up.FromString(s));
+            var ModePlay        = new RegexBasedTerminalX("modePlay", @"M[BF]");
             #endregion Directions
 
             #region Notes
-            var note            = new MyKeyTerm("N", "note");
-            var rest            = new MyKeyTerm("P", "rest");
-            var noteLetter = new RegexEnumTerm<NoteLetter>(@"[CDEFGABcdefgab]",
-                                            s => NoteLetter.C.Parse(s));
-            var dot             = ToTerm(".");
-            var sharpFlat       = new RegexEnumTerm<SharpFlat>(@"[-#+]",
-                                            s => SharpFlat.Natural.FromString(s));
-            var bagpipes        = new RegexBasedTerminalX("bagpipes", @"H[pP]");
+            var Note            = new MyKeyTerm("N", "note");
+            var Rest            = new MyKeyTerm("P", "rest");
+            var NoteLetter      = new RegexEnumTerm<NoteLetter>(@"[CDEFGABcdefgab]",
+                                            s => Music.NoteLetter.C.Parse(s));
+            var Dot             = ToTerm(".");
+            var SharpFlat       = new RegexEnumTerm<SharpFlat>(@"[-#+]",
+                                            s => Music.SharpFlat.Natural.FromString(s));
+            var Bagpipes        = new RegexBasedTerminalX("bagpipes", @"H[pP]");
             #endregion Notes
             var whiteSpace      = new RegexBasedTerminalX("whiteSpace", @"[ \t]+");
             #endregion 1-Terminals
 
-            MarkPunctuation(modePlay);        // obsolete instruction - recognize & discard
-            MarkPunctuation(NewLine, whiteSpace, length, mode, octave, tempo);
+            MarkPunctuation(ModePlay);        // obsolete instruction - recognize & discard
+            MarkPunctuation(NewLine, whiteSpace, Length, Mode, Octave, Tempo);
 
             #region 2-Nonterminals
-            var Tunes           = new TransientNonTerminal("Tunes");
-            var Tune            = new TypedNonTerminal<MusicListAstNode>();
+            var tunes           = new TransientNonTerminal("Tunes");
+            var tune            = new TypedNonTerminal<MusicListAstNode>();
 
-            var MusicLine       = new TransientNonTerminal("MusicLine");
-            var MusicBar        = new TypedNonTerminal<MusicBarAstNode>();
-            var Beam            = new TypedNonTerminal<BeamAstNode>();
+            var musicLine       = new TransientNonTerminal("MusicLine");
+            var musicBar        = new TypedNonTerminal<MusicBarAstNode>();
+            var beam            = new TypedNonTerminal<BeamAstNode>();
 
-            var Music           = new TransientNonTerminal("Music");
-            var Direction       = new TransientNonTerminal("Direction");
+            var music           = new TransientNonTerminal("Music");
+            var direction       = new TransientNonTerminal("Direction");
 
-            var Tempo           = new CommandNonTerminal<Notes, byte>(Notes => Notes.Tempo);
-            var Length          = new CommandNonTerminal<Notes, byte>(Notes => Notes.Length);
-            var Style           = new CommandNonTerminal<Notes, Style>(Notes => Notes.Style);
-            var OctaveNo        = new CommandNonTerminal<Notes, byte>(Notes => Notes.Octave);
-            var Shift           = new CommandNonTerminal<Notes, OctaveShift>(Notes => Notes.Shift);
+            var tempo           = new CommandNonTerminal<Notes, byte>(Notes => Notes.Tempo);
+            var length          = new CommandNonTerminal<Notes, byte>(Notes => Notes.Length);
+            var style           = new CommandNonTerminal<Notes, Style>(Notes => Notes.Style);
+            var octaveNo        = new CommandNonTerminal<Notes, byte>(Notes => Notes.Octave);
+            var shift           = new CommandNonTerminal<Notes, OctaveShift>(Notes => Notes.Shift);
 
-            var NoteOrShift     = new TransientNonTerminal("NoteOrShift");
-            var Note            = new TypedNonTerminal<NoteAstNode>();
-            var Rest            = new TypedNonTerminal<RestAstNode>();
-            var Pitch           = new TypedNonTerminal<PitchAstNode>();
-            var NoteNumber      = new TypedNonTerminal<NoteNumberAstNode>();
-            var NoteElement     = new TypedNonTerminal<NoteElementAstNode>();
-            var PitchOrRest     = new TransientNonTerminal("PitchOrRest");
+            var note            = new TypedNonTerminal<NoteAstNode>();
+            var rest            = new TypedNonTerminal<RestAstNode>();
+            var pitch           = new TypedNonTerminal<PitchAstNode>();
+            var noteNumber      = new TypedNonTerminal<NoteNumberAstNode>();
+            var noteElement     = new TypedNonTerminal<NoteElementAstNode>();
+            var pitchOrRest     = new TransientNonTerminal("PitchOrRest");
 
 #if KeySpec
             var FieldK           = new MyKeyTerm(@"K:", "FieldK");
@@ -90,48 +89,47 @@ namespace PGSoftwareSolutionsInc.Qabc {
             #endregion 2-Nonterminals
 
             #region 3-Rules
-            Root                = Tunes;
+            Root                = tunes;
 
-            Tunes.Rule          = MakePlusList<MusicListAstNode>(Tune, NewLine)
+            tunes.Rule          = MakePlusList<MusicListAstNode>(tune, NewLine, true)
                                 + Eof;
 
-            Tune.Rule           = MakePlusList<QabcAstNode>(Direction, whiteSpace, true) + NewLine
-                                + MakePlusList<QabcAstNode>(MusicLine);
+            tune.Rule           = MakePlusList<QabcAstNode>(musicLine);
 
-            MusicLine.Rule      = MakePlusList<QabcAstNode>(MusicBar, whiteSpace, true) + NewLine
-                                | whiteSpace + MusicLine;
+            musicLine.Rule      = MakePlusList<QabcAstNode>(musicBar)
+                                | whiteSpace + musicLine;
 
-            MusicBar.Rule       = MakePlusList<MusicBarAstNode>(Music) + bar;
+            musicBar.Rule       = MakePlusList<MusicBarAstNode>(music) + (Bar|NewLine);
 
-            Music.Rule          = Direction | Beam
-                                | Music + whiteSpace;
+            music.Rule          = direction
+                                | beam
+                                | music + whiteSpace
 #if KeySpec
                                 | FieldKeyLine
 #endif
                                 ;
-            Beam.Rule           = MakePlusList<BeamAstNode>(NoteOrShift);
-            NoteOrShift.Rule    = Note | Shift;
+            direction.Rule      = length | octaveNo | style | tempo | shift | ModePlay;
+            length.Rule         = Length + Integer;
+            style.Rule          = Mode   + ModeStyle;
+            tempo.Rule          = Tempo  + Integer;
+            octaveNo.Rule       = Octave + Integer;
+            shift.Rule          = Shift;
 
-            Direction.Rule      = Length | OctaveNo | Style | Tempo | modePlay;
-            Length.Rule         = length + integer;
-            Style.Rule          = mode   + modeStyle;
-            Tempo.Rule          = tempo  + integer;
-            OctaveNo.Rule       = octave + integer;
+            beam.Rule           = MakePlusList<BeamAstNode>(note);
 
-            Shift.Rule          = shift;
+            note.Rule           = noteNumber | noteElement;
+            noteNumber.Rule     = Note + Integer;
+            noteElement.Rule    = pitchOrRest
+                                | pitchOrRest + Integer
+                                | noteElement + MakePlusList<DotsAstNode>(Dot);
+            pitchOrRest.Rule    = pitch | rest;
+            rest.Rule           = Rest;
+            pitch.Rule          = NoteLetter
+                                | NoteLetter + SharpFlat;
 
-            Note.Rule           = NoteNumber | NoteElement;
-            NoteNumber.Rule     = note + integer;
-            NoteElement.Rule    = PitchOrRest
-                                | PitchOrRest + integer
-                                | NoteElement + MakePlusList<DotsAstNode>(dot);
-            PitchOrRest.Rule    = Pitch | Rest;
-            Rest.Rule           = rest;
-            Pitch.Rule          = noteLetter
-                                | noteLetter + sharpFlat;
-
-            MusicLine.ErrorRule = SyntaxError + NewLine;
-            Music.ErrorRule     = SyntaxError + whiteSpace;
+            tunes.ErrorRule     = SyntaxError + Eof;
+            musicLine.ErrorRule = SyntaxError + NewLine;
+            music.ErrorRule     = SyntaxError + whiteSpace;
 
             #region Key Specification
 #if KeySpec
@@ -153,12 +151,12 @@ namespace PGSoftwareSolutionsInc.Qabc {
 
             #region 4-Color Highlighting
             SetHighlighting(
-                new List<Irony.Parsing.Terminal>() {modePlay},
-                new List<Irony.Parsing.Terminal>() {note},
-                new List<Irony.Parsing.Terminal>() {rest},
-                new List<Irony.Parsing.Terminal>() {mode, modeStyle},
-                new List<Irony.Parsing.Terminal>() {noteLetter,sharpFlat,dot,integer},
-                new List<Irony.Parsing.Terminal>() {tempo,length,octave,shift}
+                new List<Irony.Parsing.Terminal>() {ModePlay},
+                new List<Irony.Parsing.Terminal>() {Note},
+                new List<Irony.Parsing.Terminal>() {Rest},
+                new List<Irony.Parsing.Terminal>() {Mode, ModeStyle},
+                new List<Irony.Parsing.Terminal>() {NoteLetter,SharpFlat,Dot,Integer},
+                new List<Irony.Parsing.Terminal>() {Tempo,Length,Octave,Shift}
                 );
             #endregion 4-Color Highlighting
         }

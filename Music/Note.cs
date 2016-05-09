@@ -141,8 +141,8 @@ namespace PGSoftwareSolutionsInc.Music {
     /// <summary>TODO</summary>
 		public static PianoKey KeyNumber(NoteLetter noteLetter, Int16 octave, SharpFlat sharpFlat) {
 			int keyNo = (4 + (octave-1) * 12 + (int)noteLetter.SemitonesFromC() + (int)sharpFlat);
-			if (!Enum.IsDefined(typeof(PianoKey),keyNo)) throw new ArgumentOutOfRangeException(
-									"KeyNo",keyNo,"Must be between 1 and 88.");
+			//if (!Enum.IsDefined(typeof(PianoKey),keyNo)) throw new ArgumentOutOfRangeException(
+			//						"KeyNo",keyNo,"Must be between 1 and 88.");
 			return checked((PianoKey)keyNo);
 		}
     /// <inherited/>

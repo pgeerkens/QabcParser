@@ -174,7 +174,7 @@ namespace PGSoftwareSolutionsInc.Music {
 		#endregion SharpFlat extensions
 
 		#region OctaveShift extensions
-    /// <summary>TODO</summary>
+        /// <summary>TODO</summary>
 		public static OctaveShift FromString(this OctaveShift octaveShift, string value) {
 			switch (value.Trim(new char[] {'o','O'})) {
 				case "<":	return OctaveShift.Down;
@@ -183,29 +183,30 @@ namespace PGSoftwareSolutionsInc.Music {
 									"input string must end in '<' or '>'.");
 			}
 		}
-    /// <summary>TODO</summary>
+        /// <summary>TODO</summary>
 		public static string AsString(this OctaveShift shift) { return shift.ToString(); }
 		#endregion OctaveShift extensions
 
 		#region NoteLettter extensions
-    /// <summary>TODO</summary>
+        /// <summary>TODO</summary>
 		public static NoteLetter Parse (this NoteLetter letter, string s) {
 			return (NoteLetter)System.Enum.Parse(typeof(NoteLetter),s);
 		}
-		/// <summary>
-		/// Returns the index for the base note according to:
-		/// <b>F</b>ather <b>C</b>harles <b>G</b>oes <b>D</b>own <b>A</b>nd <b>E</b>nds <B>B</B>attle.
-		/// </summary>
-		/// <param name="baseNote"></param>
-		/// <returns></returns>
-		public static Int16 FCGDAEB(this NoteLetter baseNote) {
-			return (Int16)"FCGDAEB".IndexOf(baseNote.ToString()[0]);	
+        /// <summary>
+        /// Returns the index for the base note according to:
+        /// <b>F</b>ather <b>C</b>harles <b>G</b>oes <b>D</b>own <b>A</b>nd <b>E</b>nds <B>B</B>attle.
+        /// </summary>
+        /// <param name="baseNote"></param>
+        /// <returns></returns>
+        public static Int16 FCGDAEB(this NoteLetter baseNote) {
+            return (Int16)"FCGDAEB".IndexOf(baseNote.ToString()[0]);	
 		}
-    /// <summary>TODO</summary>
+        /// <summary>TODO</summary>
 		public static int SemitonesFromC (this NoteLetter note) {
-			return (new int[] {0, 2, 4, 5, 7, 9,11}) [(int)note];
+            return (new int[] { 0, 2, 4, 5, 7, 9,11
+                              ,12,14,16,17,19,21,23}) [(int)note];
 		}
-    /// <summary>TODO</summary>
+        /// <summary>TODO</summary>
 		public static int NoteIndex (this NoteLetter note) {
 			return "CDEFGABcdefgab".IndexOf(note.ToString());
 		}
@@ -247,11 +248,11 @@ namespace PGSoftwareSolutionsInc.Music {
 		#endregion Mode extensions
 
 		#region PianoKey extensions
-    /// <summary>TODO</summary>
+        /// <summary>TODO</summary>
 		public static int Octave(this PianoKey @this) {
 			return ((int)@this + 8) / 12;
 		}
-    /// <summary>TODO</summary>
+        /// <summary>TODO</summary>
 		public static NoteLetter Letter(this PianoKey @this, int countSharps = 0) {
 			var noteNo	= ((new int[] {4,5,6,6,0,0,1,2,2,3,3,4}) [((int)@this) % 12]);
 							//  C   D   E F   G   A   B	// favour G# in sharp keys; A_ otherwise
@@ -259,7 +260,7 @@ namespace PGSoftwareSolutionsInc.Music {
 			if ((new int[] {0,4,0,0,7,0,5,0,0,0,0,6})[noteNo] >=-countSharps && countSharps<0) noteNo++;
 			return (NoteLetter)noteNo;
 		}
-    /// <summary>TODO</summary>
+        /// <summary>TODO</summary>
 		public static SharpFlat Accidental(this PianoKey key) {
 			var index = ((int)key) % 12;
 			return (SharpFlat)((new int[] {-1,0,-1,0,0,1,0,-1,0,0,1,0})[index]);

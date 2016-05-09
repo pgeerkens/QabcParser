@@ -112,11 +112,6 @@ namespace PGSoftwareSolutionsInc.Qabc {
 		}
 		private             Int16		Octave	    { get; set; }
 	}
-    public class MusicBarAstNode : PitchAstNode {
-        public override PianoKey   PianoKey     { get { return PianoKey.Bar; } }
-        public override NoteLetter NoteLetter   { get { return NoteLetter.C; } }
-        public override SharpFlat  SharpFlat    { get { return SharpFlat.Natural; } }
-    }
     public class RestAstNode			: PitchAstNode {
 		public override	PianoKey	PianoKey	{ get { return PianoKey.Rest; } }
 		public override	NoteLetter	NoteLetter	{ get { return NoteLetter.C; } }
@@ -125,8 +120,8 @@ namespace PGSoftwareSolutionsInc.Qabc {
 	public class DotsAstNode		: ValueNode<QabcAstContext,byte> {
 		public override byte Value { get { return (byte)ChildNodes.Count; } }
 	}
-	#endregion Note Nodes
+    #endregion Note Nodes
 
-	public class BeamAstNode : QabcAstNode {}
-    public class MusicLineAstNode : QabcAstNode {}
+    public class BeamAstNode      : QabcAstNode {}
+    public class MusicBarAstNode  : QabcAstNode {}
 }

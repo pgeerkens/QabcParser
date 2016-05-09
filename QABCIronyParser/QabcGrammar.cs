@@ -98,11 +98,13 @@ namespace PGSoftwareSolutionsInc.Qabc {
             Tune.Rule           = MakePlusList<QabcAstNode>(Direction, whiteSpace, true) + NewLine
                                 + MakePlusList<QabcAstNode>(MusicLine);
 
-            MusicLine.Rule      = MakePlusList<QabcAstNode>(MusicBar, whiteSpace, true) + NewLine;
+            MusicLine.Rule      = MakePlusList<QabcAstNode>(MusicBar, whiteSpace, true) + NewLine
+                                | whiteSpace + MusicLine;
 
-            MusicBar.Rule       = MakePlusList<MusicBarAstNode>(Music, whiteSpace, true) + bar;
+            MusicBar.Rule       = MakePlusList<MusicBarAstNode>(Music) + bar;
 
             Music.Rule          = Direction | Beam
+                                | Music + whiteSpace;
 #if KeySpec
                                 | FieldKeyLine
 #endif
@@ -128,20 +130,20 @@ namespace PGSoftwareSolutionsInc.Qabc {
             Pitch.Rule          = noteLetter
                                 | noteLetter + sharpFlat;
 
-            Direction.ErrorRule = SyntaxError + NewLine;
-            Note.ErrorRule      = SyntaxError + whiteSpace;
+            MusicLine.ErrorRule = SyntaxError + NewLine;
+            Music.ErrorRule     = SyntaxError + whiteSpace;
 
             #region Key Specification
 #if KeySpec
-            FieldKeyLine.Rule    = FieldK + Key; // + NewLine;
+            FieldKeyLine.Rule   = FieldK + Key; // + NewLine;
             Key.Rule            = KeySpec | bagpipes;
             KeySpec.Rule        = Pitch 
 //                                | keyNote + modeSpec 
     ;    //                        | KeySpec + MakePlusList(GlobalAccidental,typeof(ListNode));
 //            keyNote.Rule        = noteLetter | noteLetter + sharpFlat; //KeyAccidental;
-//            modeSpec.Rule        = Mode
+//            modeSpec.Rule       = Mode
 //                                | PreferShiftHere() + whiteSpace + Mode;
-//            Mode.Rule            = MakePlusList(Alpha, typeof(AbcList_String));    
+//            Mode.Rule           = MakePlusList(Alpha, typeof(AbcList_String));    
                                         // only specified modes allowed: look-up in list
         //    GlobalAccidental.Rule= PreferShiftHere() + whiteSpace + noteLetter + sharpFlat;
             MarkTransient(FieldKeyLine);
@@ -158,7 +160,7 @@ namespace PGSoftwareSolutionsInc.Qabc {
                 new List<Irony.Parsing.Terminal>() {noteLetter,sharpFlat,dot,integer},
                 new List<Irony.Parsing.Terminal>() {tempo,length,octave,shift}
                 );
-            #endregion 7-Color Highlighting
+            #endregion 4-Color Highlighting
         }
 
         /// <summary>Whitespace is part of this grammar, so we override the routine that skips it.</summary>

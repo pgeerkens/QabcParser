@@ -101,8 +101,13 @@ namespace PGSoftwareSolutionsInc.Qabc {
             musicLine.Rule      = MakePlusList<QabcAstNode>(musicBar)
                                 | WhiteSpace + musicLine;
 
-            musicBar.Rule       = MakePlusList<MusicBarAstNode>(music) + (Bar|NewLine);
-
+        #if InferBarAtEndOfLine
+            var bar             = new TransientNonTerminal("bar");
+            musicBar.Rule       = MakePlusList<MusicBarAstNode>(music) + bar;
+            bar.Rule            = Bar | NewLine;
+        #else
+            musicBar.Rule       = MakePlusList<MusicBarAstNode>(music) + (Bar | NewLine);
+        #endif
             music.Rule          = direction
                                 | beam
                                 | music + WhiteSpace
@@ -133,7 +138,7 @@ namespace PGSoftwareSolutionsInc.Qabc {
             musicLine.ErrorRule = SyntaxError + NewLine;
             music.ErrorRule     = SyntaxError + WhiteSpace;
 
-            #region Key Specification
+#region Key Specification
 #if KeySpec
             FieldKeyLine.Rule   = FieldK + Key; // + NewLine;
             Key.Rule            = KeySpec | bagpipes;
@@ -148,7 +153,7 @@ namespace PGSoftwareSolutionsInc.Qabc {
         //    GlobalAccidental.Rule= PreferShiftHere() + whiteSpace + noteLetter + sharpFlat;
             MarkTransient(FieldKeyLine);
 #endif
-            #endregion Key Specification
+#endregion Key Specification
             #endregion 3-Rules
 
             #region 4-Color Highlighting
@@ -162,21 +167,25 @@ namespace PGSoftwareSolutionsInc.Qabc {
                 );
             #endregion 4-Color Highlighting
 
-            #region Clear shift-reduce conflicts
-            #if !ClearConflict
+#region Clear shift-reduce conflicts
+#if ClearConflict_1
             RegisterOperators(10, Associativity.Right, Length);
             RegisterOperators(10, Associativity.Right, Mode);
             RegisterOperators(10, Associativity.Right, Tempo);
             RegisterOperators(10, Associativity.Right, Octave);
             RegisterOperators(10, Associativity.Right, Shift);
             RegisterOperators(10, Associativity.Right, ModePlay);
-
+#endif
+#if ClearConflict_2
             RegisterOperators(10, Associativity.Right, Note);
             RegisterOperators(10, Associativity.Right, NoteLetter);
             RegisterOperators(10, Associativity.Right, Rest);
-            #endif
-            #endregion
+#endif
+#endregion
 
+        #if EliminateMusicList
+            MarkTransient(tune);
+        #endif
             LanguageFlags = LanguageFlags.CreateAst | LanguageFlags.NewLineBeforeEOF;
         }
 

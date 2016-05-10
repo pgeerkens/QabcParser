@@ -21,44 +21,45 @@ namespace PGSoftwareSolutionsInc.Qabc {
         public QabcGrammar() : base(false) {
             #region 1-Terminals
             #region Directions
-            var Bar             = new RegexBasedTerminalX("bar", @":?[|][1-9:\]]?");
-            var Mode            = new MyKeyTerm("M", "mode");
+            var Bar             = new RegexBasedTerminalX("Bar", @":?[|][1-9:\]]?");
+            var Mode            = new MyKeyTerm("M", "Mode");
             var ModeStyle       = new RegexEnumTerm<Style>(@"[NLS]");
-            var Length          = new MyKeyTerm("L", "length");
-            var Octave          = new MyKeyTerm("O", "octave");
-            var Tempo           = new MyKeyTerm("T", "tempo");
-            var Integer         = new MusicIntegerLiteral<Byte>("integer");
+            var Length          = new MyKeyTerm("L", "Length");
+            var Octave          = new MyKeyTerm("O", "Octave");
+            var Tempo           = new MyKeyTerm("T", "Tempo");
+            var Integer         = new MusicIntegerLiteral<Byte>("Integer");
             var Shift           = new RegexEnumTerm<OctaveShift>(@"O?[<>]",
                                             s => Music.OctaveShift.Up.FromString(s));
-            var ModePlay        = new RegexBasedTerminalX("modePlay", @"M[BF]");
+            var ModePlay        = new RegexBasedTerminalX("ModePlay", @"M[BF]");
             #endregion Directions
 
             #region Notes
-            var Note            = new MyKeyTerm("N", "note");
-            var Rest            = new MyKeyTerm("P", "rest");
+            var Note            = new MyKeyTerm("N", "Note");
+            var Rest            = new MyKeyTerm("P", "Rest");
             var NoteLetter      = new RegexEnumTerm<NoteLetter>(@"[CDEFGABcdefgab]",
                                             s => Music.NoteLetter.C.Parse(s));
             var Dot             = ToTerm(".");
             var SharpFlat       = new RegexEnumTerm<SharpFlat>(@"[-#+]",
                                             s => Music.SharpFlat.Natural.FromString(s));
-            var Bagpipes        = new RegexBasedTerminalX("bagpipes", @"H[pP]");
+            var Bagpipes        = new RegexBasedTerminalX("Bagpipes", @"H[pP]");
             #endregion Notes
-            var whiteSpace      = new RegexBasedTerminalX("whiteSpace", @"[ \t]+");
+
+            var WhiteSpace      = new RegexBasedTerminalX("WhiteSpace", @"[ \t]+");
             #endregion 1-Terminals
 
             MarkPunctuation(ModePlay);        // obsolete instruction - recognize & discard
-            MarkPunctuation(NewLine, whiteSpace, Length, Mode, Octave, Tempo);
+            MarkPunctuation(NewLine, WhiteSpace, Length, Mode, Octave, Tempo);
 
             #region 2-Nonterminals
-            var tunes           = new TransientNonTerminal("Tunes");
+            var tunes           = new TransientNonTerminal("tunes");
             var tune            = new TypedNonTerminal<MusicListAstNode>();
 
-            var musicLine       = new TransientNonTerminal("MusicLine");
+            var musicLine       = new TransientNonTerminal("musicLine");
             var musicBar        = new TypedNonTerminal<MusicBarAstNode>();
             var beam            = new TypedNonTerminal<BeamAstNode>();
 
-            var music           = new TransientNonTerminal("Music");
-            var direction       = new TransientNonTerminal("Direction");
+            var music           = new TransientNonTerminal("music");
+            var direction       = new TransientNonTerminal("direction");
 
             var tempo           = new CommandNonTerminal<Notes, byte>(Notes => Notes.Tempo);
             var length          = new CommandNonTerminal<Notes, byte>(Notes => Notes.Length);
@@ -71,7 +72,7 @@ namespace PGSoftwareSolutionsInc.Qabc {
             var pitch           = new TypedNonTerminal<PitchAstNode>();
             var noteNumber      = new TypedNonTerminal<NoteNumberAstNode>();
             var noteElement     = new TypedNonTerminal<NoteElementAstNode>();
-            var pitchOrRest     = new TransientNonTerminal("PitchOrRest");
+            var pitchOrRest     = new TransientNonTerminal("pitchOrRest");
 
 #if KeySpec
             var FieldK           = new MyKeyTerm(@"K:", "FieldK");
@@ -98,13 +99,13 @@ namespace PGSoftwareSolutionsInc.Qabc {
             tune.Rule           = MakePlusList<QabcAstNode>(musicLine);
 
             musicLine.Rule      = MakePlusList<QabcAstNode>(musicBar)
-                                | whiteSpace + musicLine;
+                                | WhiteSpace + musicLine;
 
             musicBar.Rule       = MakePlusList<MusicBarAstNode>(music) + (Bar|NewLine);
 
             music.Rule          = direction
                                 | beam
-                                | music + whiteSpace
+                                | music + WhiteSpace
 #if KeySpec
                                 | FieldKeyLine
 #endif
@@ -130,7 +131,7 @@ namespace PGSoftwareSolutionsInc.Qabc {
 
             tunes.ErrorRule     = SyntaxError + Eof;
             musicLine.ErrorRule = SyntaxError + NewLine;
-            music.ErrorRule     = SyntaxError + whiteSpace;
+            music.ErrorRule     = SyntaxError + WhiteSpace;
 
             #region Key Specification
 #if KeySpec

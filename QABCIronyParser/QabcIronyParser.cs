@@ -17,8 +17,6 @@ namespace PGSoftwareSolutionsInc.Qabc {
         /// <summary>TODO</summary>
         public static QabcIronyParser Instance { get { return _first; } } static QabcIronyParser _first = new QabcIronyParser();
 
-        
-
         /// <summary>TODO</summary>
         public QabcIronyParser() : base(new QabcGrammar()) {}
         /// <summary>TODO</summary>

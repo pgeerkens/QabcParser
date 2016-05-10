@@ -28,7 +28,6 @@ namespace PGSoftwareSolutionsInc.Qabc {
 			ParseTree	_parseTree;
 			if (GCFirst) {	_parseTree	= null;	GC.Collect(); }
 
-			Language.Grammar.LanguageFlags = LanguageFlags.CreateAst;
 			Parse(music, "<music>");
 			_parseTree = Context.CurrentParseTree;
 			Errors = _parseTree.ParserMessages;

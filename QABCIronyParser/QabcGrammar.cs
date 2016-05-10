@@ -6,6 +6,7 @@
 //#define KeySpec
 using System;
 using System.Collections.Generic;
+using Irony.Parsing;
 
 using PGSoftwareSolutionsInc.PGIrony;
 using PGSoftwareSolutionsInc.Music;
@@ -159,6 +160,8 @@ namespace PGSoftwareSolutionsInc.Qabc {
                 new List<Irony.Parsing.Terminal>() {Tempo,Length,Octave,Shift}
                 );
             #endregion 4-Color Highlighting
+
+            LanguageFlags = LanguageFlags.CreateAst | LanguageFlags.NewLineBeforeEOF;
         }
 
         /// <summary>Whitespace is part of this grammar, so we override the routine that skips it.</summary>

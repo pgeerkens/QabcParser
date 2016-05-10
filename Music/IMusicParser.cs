@@ -68,14 +68,14 @@ namespace PGSoftwareSolutionsInc.Music {
 	public enum Octave { _0, _1, _2, _3, _4, _5, _6, _7, _8 }
 	#pragma warning restore
 
-    /// <summary>TODO</summary>
+    /// <summary>Play styles</summary>
 	public enum Style {
-    /// <summary>TODO</summary>
+        /// <summary>Legato</summary>
 		L, // Legato
-    /// <summary>TODO</summary>
-		N, //	Normal
-    /// <summary>TODO</summary>
-		S, //	Staccato
+        /// <summary>Normal</summary>
+		N, // Normal
+        /// <summary>Staccato</summary>
+		S, // Staccato
 	} 
 
     /// <summary>TODO</summary>

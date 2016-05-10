@@ -24,7 +24,8 @@ namespace PGSoftwareSolutionsInc.Qabc {
 
     /// <summary>TODO</summary>
 	public class MusicListAstNode	: QabcAstNode {
-		public Tune<INote> Tune() { 
+        /// <summary>TODO</summary>
+        public Tune<INote> Tune() { 
 			EvaluateTree(Context); 	
 			return Context.Tune;	
 		}

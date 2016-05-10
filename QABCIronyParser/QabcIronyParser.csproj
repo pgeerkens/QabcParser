@@ -84,9 +84,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="QabcPlayMidi.snk" />
-    <None Include="WillTell.qabc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="Sample Tunes\Can You Recognize It.qabc" />
+    <None Include="Sample Tunes\Doe, A Deer.qabc" />
+    <None Include="Sample Tunes\Ecuador.qabc" />
+    <None Include="Sample Tunes\Funeral March.qabc" />
+    <None Include="Sample Tunes\God Save The Queen.qabc" />
+    <None Include="Sample Tunes\Jingle Bells.qabc" />
+    <None Include="Sample Tunes\Macarena.qabc" />
+    <None Include="Sample Tunes\Popcorn.qabc" />
+    <None Include="Sample Tunes\Take Me Out To The Ball Game.qabc" />
+    <None Include="Sample Tunes\The Lion Sleeps Tonight.qabc" />
+    <None Include="Sample Tunes\William Tell Overture Finale.qabc" />
+    <None Include="Sample Tunes\Yankee Doodle.qabc" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

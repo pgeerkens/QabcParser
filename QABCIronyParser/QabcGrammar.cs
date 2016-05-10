@@ -64,7 +64,7 @@ namespace PGSoftwareSolutionsInc.Qabc {
             var tempo           = new CommandNonTerminal<Notes, byte>(Notes => Notes.Tempo);
             var length          = new CommandNonTerminal<Notes, byte>(Notes => Notes.Length);
             var style           = new CommandNonTerminal<Notes, Style>(Notes => Notes.Style);
-            var octaveNo        = new CommandNonTerminal<Notes, byte>(Notes => Notes.Octave);
+            var octave          = new CommandNonTerminal<Notes, byte>(Notes => Notes.Octave);
             var shift           = new CommandNonTerminal<Notes, OctaveShift>(Notes => Notes.Shift);
 
             var note            = new TypedNonTerminal<NoteAstNode>();
@@ -110,11 +110,11 @@ namespace PGSoftwareSolutionsInc.Qabc {
                                 | FieldKeyLine
 #endif
                                 ;
-            direction.Rule      = length | octaveNo | style | tempo | shift | ModePlay;
+            direction.Rule      = length | octave | style | tempo | shift | ModePlay;
             length.Rule         = Length + Integer;
             style.Rule          = Mode   + ModeStyle;
             tempo.Rule          = Tempo  + Integer;
-            octaveNo.Rule       = Octave + Integer;
+            octave.Rule         = Octave + Integer;
             shift.Rule          = Shift;
 
             beam.Rule           = MakePlusList<BeamAstNode>(note);
@@ -161,6 +161,21 @@ namespace PGSoftwareSolutionsInc.Qabc {
                 new List<Irony.Parsing.Terminal>() {Tempo,Length,Octave,Shift}
                 );
             #endregion 4-Color Highlighting
+
+            #region Clear shift-reduce conflicts
+            #if !ClearConflict
+            RegisterOperators(10, Associativity.Right, Length);
+            RegisterOperators(10, Associativity.Right, Mode);
+            RegisterOperators(10, Associativity.Right, Tempo);
+            RegisterOperators(10, Associativity.Right, Octave);
+            RegisterOperators(10, Associativity.Right, Shift);
+            RegisterOperators(10, Associativity.Right, ModePlay);
+
+            RegisterOperators(10, Associativity.Right, Note);
+            RegisterOperators(10, Associativity.Right, NoteLetter);
+            RegisterOperators(10, Associativity.Right, Rest);
+            #endif
+            #endregion
 
             LanguageFlags = LanguageFlags.CreateAst | LanguageFlags.NewLineBeforeEOF;
         }

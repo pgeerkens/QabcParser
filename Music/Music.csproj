@@ -39,7 +39,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>QabcPlayMidi.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Music.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -58,7 +58,7 @@
     <Compile Include="Tune.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="QabcPlayMidi.snk" />
+    <None Include="Music.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

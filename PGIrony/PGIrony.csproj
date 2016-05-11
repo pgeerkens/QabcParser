@@ -5,15 +5,18 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2CBCABF6-0B20-43A9-96BD-7CD69C9023B9}</ProjectGuid>
+    <ProjectGuid>{970150DB-B109-4F5D-9F0B-AF8921B3D7F1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PGSoftwareSolutionsInc.Util.PlayWaveLib</RootNamespace>
-    <AssemblyName>QABCIronyParser</AssemblyName>
+    <RootNamespace>PGSoftwareSolutionsInc.PGIrony</RootNamespace>
+    <AssemblyName>PGIrony</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,29 +26,30 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\QABCIronyParser.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\MyIrony.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\QABCIronyParser.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\PGIrony.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>QabcParser.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>PGIrony.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Irony">
-      <HintPath>..\..\bin\Irony\Release\Irony.dll</HintPath>
+    <Reference Include="Irony, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Irony_2013_12_12\Irony\bin\Release\Irony.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,43 +60,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AwareNote.cs" />
-    <Compile Include="KeySpec.cs" />
+    <Compile Include="AbstractAstNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AstContext.cs" />
+    <Compile Include="DataLiteralBase.cs" />
+    <Compile Include="Grammar.cs" />
+    <Compile Include="LogMessage.cs" />
+    <Compile Include="NonTerminals.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QabcAstContext.cs" />
-    <Compile Include="QabcAstNode.cs" />
-    <Compile Include="QabcGrammar.cs" />
-    <Compile Include="QabcIronyParser.cs" />
-    <Compile Include="QabcKey.cs" />
+    <Compile Include="AstNode.cs" />
+    <Compile Include="RegexBasedTerminalX.cs" />
+    <Compile Include="Terminals.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Music\Music.csproj">
-      <Project>{7d1bfd3b-d1de-44ff-914c-5e216309e5d9}</Project>
-      <Name>Music</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PGIrony\PGIrony.csproj">
-      <Project>{970150db-b109-4f5d-9f0b-af8921b3d7f1}</Project>
-      <Name>PGIrony</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Util\Util.csproj">
-      <Project>{82F1BDD6-4BA9-493F-A778-9E3E5E93D254}</Project>
-      <Name>Util</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="QabcParser.snk" />
-    <None Include="Sample Tunes\Can You Recognize It.qabc" />
-    <None Include="Sample Tunes\Doe, A Deer.qabc" />
-    <None Include="Sample Tunes\Ecuador.qabc" />
-    <None Include="Sample Tunes\Funeral March.qabc" />
-    <None Include="Sample Tunes\God Save The Queen.qabc" />
-    <None Include="Sample Tunes\Jingle Bells.qabc" />
-    <None Include="Sample Tunes\Macarena.qabc" />
-    <None Include="Sample Tunes\Popcorn.qabc" />
-    <None Include="Sample Tunes\Take Me Out To The Ball Game.qabc" />
-    <None Include="Sample Tunes\The Lion Sleeps Tonight.qabc" />
-    <None Include="Sample Tunes\William Tell Overture Finale.qabc" />
-    <None Include="Sample Tunes\Yankee Doodle.qabc" />
+    <None Include="PGIrony.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

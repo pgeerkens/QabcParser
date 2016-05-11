@@ -103,7 +103,7 @@ namespace PGSoftwareSolutionsInc.Qabc {
                                 | WhiteSpace + musicLine;
 
             musicBar.Rule       = MakePlusList<MusicBarAstNode>(music) + bar;
-            bar.Rule            = Bar | NewLine;
+            bar.Rule            = Bar | NewLine | bar + WhiteSpace;
             music.Rule          = direction
                                 | beam
                                 | music + WhiteSpace
@@ -173,11 +173,10 @@ namespace PGSoftwareSolutionsInc.Qabc {
             RegisterOperators(10, Associativity.Right, Note);
             RegisterOperators(10, Associativity.Right, NoteLetter);
             RegisterOperators(10, Associativity.Right, Rest);
+            RegisterOperators(10, Associativity.Left, WhiteSpace);
             #endregion
 
-        #if !EliminateMusicList
             MarkTransient(tune);
-        #endif
             LanguageFlags = LanguageFlags.CreateAst | LanguageFlags.NewLineBeforeEOF;
         }
 

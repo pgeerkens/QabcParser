@@ -36,10 +36,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>QabcPlayMidi.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Util.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -67,7 +67,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="QabcPlayMidi.snk" />
+    <None Include="Util.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,16 +1,25 @@
-﻿using System.Reflection;
+﻿#region License - Microsoft Public License - from PG Software Solutions Inc.
+/***********************************************************************************
+ * This software is copyright © 2012 by PG Software Solutions Inc. and licensed under
+ * the Microsoft Public License (http://pgirony.codeplex.com/license).
+ * 
+ * Author:			Pieter Geerkens
+ * Organization:	PG Software Solutions Inc.
+ * *********************************************************************************/
+#endregion
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("QABCIronyParser")]
-[assembly: AssemblyDescription("Parser for simplified QABC Notation")]
+[assembly: AssemblyTitle("MyIrony")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("PG Software Solutions Inc.")]
-[assembly: AssemblyProduct("QABCIronyParser")]
-[assembly: AssemblyCopyright("Copyright © Pieter Geerkens 2016")]
+[assembly: AssemblyProduct("MyIrony")]
+[assembly: AssemblyCopyright("Copyright © PG Software Solutions Inc. 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +29,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7fa98abc-eb99-45ae-8709-100b2315c894")]
+[assembly: Guid("22b78c7d-1cf6-4d36-8977-67b56e7d3373")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +41,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
+#pragma warning disable
 [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.*")]
+#pragma warning restore

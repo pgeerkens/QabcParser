@@ -11,12 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
-using System.CodeDom;
-using System.Xml;
-using System.IO;
 
-using Irony.Ast;
 using Irony.Parsing;
 
 // Additional bits and pieces needed in Irony.Ast

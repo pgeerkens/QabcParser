@@ -13,7 +13,7 @@ using PGSoftwareSolutionsInc.Music;
 
 namespace PGSoftwareSolutionsInc.Qabc {
     /// <summary>TODO</summary>
-    [Irony.Parsing.Language("QABC", "1.0", "QBasic-ABC Parser")]
+    [Language("QABC", "1.0", "QBasic-ABC Parser")]
     public partial class QabcGrammar : PGIrony.Grammar<QabcAstContext> {
         private enum Dots { zero, one, two, three }
 
@@ -154,12 +154,12 @@ namespace PGSoftwareSolutionsInc.Qabc {
 
             #region 4-Color Highlighting
             SetHighlighting(
-                new List<Irony.Parsing.Terminal>() {ModePlay},
-                new List<Irony.Parsing.Terminal>() {Note},
-                new List<Irony.Parsing.Terminal>() {Rest},
-                new List<Irony.Parsing.Terminal>() {Mode, ModeStyle},
-                new List<Irony.Parsing.Terminal>() {NoteLetter,SharpFlat,Dot,Integer},
-                new List<Irony.Parsing.Terminal>() {Tempo,Length,Octave,Shift}
+                new List<Terminal>() {ModePlay},
+                new List<Terminal>() {Note},
+                new List<Terminal>() {Rest},
+                new List<Terminal>() {Mode, ModeStyle},
+                new List<Terminal>() {NoteLetter,SharpFlat,Dot,Integer},
+                new List<Terminal>() {Tempo,Length,Octave,Shift}
                 );
             #endregion 4-Color Highlighting
 
@@ -177,16 +177,17 @@ namespace PGSoftwareSolutionsInc.Qabc {
             #endregion
 
             MarkTransient(tune);
+            MarkTransient(beam);
             LanguageFlags = LanguageFlags.CreateAst | LanguageFlags.NewLineBeforeEOF;
         }
 
         /// <summary>Whitespace is part of this grammar, so we override the routine that skips it.</summary>
-        public override void SkipWhitespace(Irony.Parsing.ISourceStream source) { ; }
+        public override void SkipWhitespace(ISourceStream source) { ; }
 
         /// <summary>Provide MyGrammar with appropriate AstContext.</summary>
         /// <param name="language"></param>
         /// <returns></returns>
-        protected override QabcAstContext GetContext(Irony.Parsing.LanguageData language) {
+        protected override QabcAstContext GetContext(LanguageData language) {
             return new QabcAstContext(language);
         }
     }

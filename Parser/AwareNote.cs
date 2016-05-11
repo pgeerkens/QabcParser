@@ -4,8 +4,6 @@
 //                   Copyright (C) Pieter Geerkens 2012
 ////////////////////////////////////////////////////////////////////////
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 using Irony.Parsing;
 

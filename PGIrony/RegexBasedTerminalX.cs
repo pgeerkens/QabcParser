@@ -21,20 +21,20 @@ using Irony.Parsing;
 
 namespace PGSoftwareSolutionsInc.PGIrony {
 
-  /// <summary>Identical to Irony.Parsing.RegexBasedTerminal (as of 2012-09-29) except options 
-  /// Compiled and ExplicitCapture are automatically set.</summary>
-  public class RegexBasedTerminalX : Terminal {
-	  /// <summary>Identical to Irony.Parsing.RegexBasedTerminal (as of 2012-09-29) except options 
-	  /// Compiled and ExplicitCapture are automatically set.</summary>
-    public RegexBasedTerminalX(string pattern, params string[] prefixes) : base("name") {
+    /// <summary>Identical to <see cref="Irony.Parsing.RegexBasedTerminal"/> (as of 2012-09-29) except options 
+    /// Compiled and ExplicitCapture are automatically set.</summary>
+    public class RegexBasedTerminalX : Terminal {
+        /// <summary>Identical to <see cref="Irony.Parsing.RegexBasedTerminal"/> (as of 2012-09-29) except options 
+        /// Compiled and ExplicitCapture are automatically set.</summary>
+        public RegexBasedTerminalX(string pattern, params string[] prefixes) : base("name") {
       Pattern = pattern;
       if (prefixes != null)
         Prefixes.AddRange(prefixes);
 		Count++;
     }
-	  /// <summary>Identical to Irony.Parsing.RegexBasedTerminal (as of 2012-09-29) except options 
-	  /// Compiled and ExplicitCapture are automatically set.</summary>
-    public RegexBasedTerminalX(string name, string pattern, params string[] prefixes) : base(name) {
+        /// <summary>Identical to <see cref="Irony.Parsing.RegexBasedTerminal"/> (as of 2012-09-29) except options 
+        /// Compiled and ExplicitCapture are automatically set.</summary>
+        public RegexBasedTerminalX(string name, string pattern, params string[] prefixes) : base(name) {
       Pattern = pattern;
       if (prefixes != null)
         Prefixes.AddRange(prefixes);

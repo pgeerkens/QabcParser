@@ -1,16 +1,16 @@
 ﻿////////////////////////////////////////////////////////////////////////
 //                  Q - A B C   S O U N D   P L A Y E R
 //
-//                   Copyright (C) Pieter Geerkens 2012
+//                   Copyright (C) Pieter Geerkens 2012-2016
 ////////////////////////////////////////////////////////////////////////
 using System;
 
 using Irony.Ast;
 using Irony.Parsing;
 
-using PGSoftwareSolutionsInc.Music;
+using PGSoftwareSolutions.Music;
 
-namespace PGSoftwareSolutionsInc.Qabc {
+namespace PGSoftwareSolutions.Qabc {
     /// <summary>TODO</summary>
 	public class QabcAstContext : PGIrony.AstContext {
         /// <summary>TODO</summary>

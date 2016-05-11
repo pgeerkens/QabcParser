@@ -1,17 +1,17 @@
 ﻿////////////////////////////////////////////////////////////////////////
 //                  Q - A B C   S O U N D   P L A Y E R
 //
-//                   Copyright (C) Pieter Geerkens 2012
+//                   Copyright (C) Pieter Geerkens 2012-2016
 ////////////////////////////////////////////////////////////////////////
 //#define KeySpec
 using System;
 using System.Collections.Generic;
 using Irony.Parsing;
 
-using PGSoftwareSolutionsInc.PGIrony;
-using PGSoftwareSolutionsInc.Music;
+using PGSoftwareSolutions.PGIrony;
+using PGSoftwareSolutions.Music;
 
-namespace PGSoftwareSolutionsInc.Qabc {
+namespace PGSoftwareSolutions.Qabc {
     /// <summary>TODO</summary>
     [Language("QABC", "1.0", "QBasic-ABC Parser")]
     public partial class QabcGrammar : PGIrony.Grammar<QabcAstContext> {

@@ -1,7 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////
 //                  Q - A B C   S O U N D   P L A Y E R
 //
-//                   Copyright (C) Pieter Geerkens 2012
+//                   Copyright (C) Pieter Geerkens 2012-2016
 ////////////////////////////////////////////////////////////////////////
 using System;
 using System.IO;
@@ -9,9 +9,9 @@ using System.IO;
 using Irony;
 using Irony.Parsing;
 
-using PGSoftwareSolutionsInc.Music;
+using PGSoftwareSolutions.Music;
 
-namespace PGSoftwareSolutionsInc.Qabc {
+namespace PGSoftwareSolutions.Qabc {
     /// <summary>TODO</summary>
 	public class QabcIronyParser : Parser, IMusicParser<Tune<INote>> {
         /// <summary>TODO</summary>

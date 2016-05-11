@@ -16,7 +16,7 @@ using System.Text;
 using Irony.Ast;
 using Irony.Parsing;
 
-namespace PGSoftwareSolutionsInc.PGIrony {
+namespace PGSoftwareSolutions.PGIrony {
 	/// <summary>
 	/// Automatically set NonTerminal name as Type Name stripped of "Node"
 	/// </summary>

@@ -1,7 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////
 //                  Q - A B C   S O U N D   P L A Y E R
 //
-//                   Copyright (C) Pieter Geerkens 2012
+//                   Copyright (C) Pieter Geerkens 2012-2016
 ////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
@@ -9,16 +9,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-//using Irony;
-
-namespace PGSoftwareSolutionsInc.Music {
+namespace PGSoftwareSolutions.Music {
     /// <summary>TODO</summary>
 	public interface IMusicParser<T>  {
-    /// <summary>TODO</summary>
+        /// <summary>TODO</summary>
 		T Parse(string music);
-    /// <summary>TODO</summary>
+        /// <summary>TODO</summary>
 		T Parse(TextReader reader);
-//		LogMessageList	Errors	{ get; }
 	}
     /// <summary>TODO</summary>
 	public enum NoteType {
@@ -43,7 +40,7 @@ namespace PGSoftwareSolutionsInc.Music {
 	}
     /// <summary>TODO</summary>
 	public static class NoteTypeExtensions {
-    /// <summary>TODO</summary>
+        /// <summary>TODO</summary>
 		public static NoteType GetNoteType (this NoteType type, Int16 length) {
 			var i = (int)Math.Floor(Math.Log(length,2));
 			var n = (NoteType)(i);
@@ -55,13 +52,12 @@ namespace PGSoftwareSolutionsInc.Music {
 
     /// <summary>TODO</summary>
 	public interface IPitch {
-    /// <summary>TODO</summary>
+        /// <summary>TODO</summary>
 		PianoKey		PianoKey		{ get; }
-    /// <summary>TODO</summary>
+        /// <summary>TODO</summary>
 		NoteLetter	NoteLetter	{ get; }
-    /// <summary>TODO</summary>
+        /// <summary>TODO</summary>
 		SharpFlat	SharpFlat	{ get; }
-//		Octave		Octave		{ get; }
 	}
 
 	#pragma warning disable
@@ -94,9 +90,9 @@ namespace PGSoftwareSolutionsInc.Music {
 
     /// <summary>TODO</summary>
 	public enum OctaveShift {
-    /// <summary>TODO</summary>
+        /// <summary>TODO</summary>
 		Down	= -1,
-    /// <summary>TODO</summary>
+        /// <summary>TODO</summary>
 		Up		= +1
 	}
 

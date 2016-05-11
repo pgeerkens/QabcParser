@@ -15,7 +15,7 @@ using System.Text;
 using Irony;
 using Irony.Parsing;
 
-namespace PGSoftwareSolutionsInc.PGIrony {
+namespace PGSoftwareSolutions.PGIrony {
 	/// <summary>Extension of Iorny.LogMessage that provides a SourceSpan, with the token length as well sa position.</summary>
 	public class LogMessage : Irony.LogMessage {
 	/// <summary>Extension of Iorny.LogMessage that provides a SourceSpan, with the token length as well sa position.</summary>

@@ -19,7 +19,7 @@ using System.Text.RegularExpressions;
 using Irony;
 using Irony.Parsing;
 
-namespace PGSoftwareSolutionsInc.PGIrony {
+namespace PGSoftwareSolutions.PGIrony {
 
     /// <summary>Identical to <see cref="Irony.Parsing.RegexBasedTerminal"/> (as of 2012-09-29) except options 
     /// Compiled and ExplicitCapture are automatically set.</summary>

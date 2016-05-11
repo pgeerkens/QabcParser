@@ -1,13 +1,13 @@
 ﻿////////////////////////////////////////////////////////////////////////
 //                  Q - A B C   S O U N D   P L A Y E R
 //
-//                   Copyright (C) Pieter Geerkens 2012
+//                   Copyright (C) Pieter Geerkens 2012-2016
 ////////////////////////////////////////////////////////////////////////
 using System;
 
 using Irony.Parsing;
 
-namespace PGSoftwareSolutionsInc.Qabc {
+namespace PGSoftwareSolutions.Qabc {
 	class KeySpec {
 	}
 	public class FieldKeyNode			: QabcAstNode { }

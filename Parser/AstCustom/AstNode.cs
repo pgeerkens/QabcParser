@@ -16,7 +16,7 @@ using Irony;
 using Irony.Ast;
 using Irony.Parsing;
 
-namespace PGSoftwareSolutionsInc.PGIrony {
+namespace PGSoftwareSolutions.PGIrony {
 	#region interfaces: IAstWorkNode, IValueNode
 	public interface IAstValueNode<TValue> {
 		TValue Value { get; }

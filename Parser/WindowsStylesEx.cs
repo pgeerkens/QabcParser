@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PGSoftwareSolutionsInc.Util {
+namespace PGSoftwareSolutions.Util {
    [Flags]     
-   public enum WindowStylesEx : uint 
+   internal enum WindowStylesEx : uint 
    {
       /// <summary>
       /// Specifies that a window created with this style accepts drag-drop files.

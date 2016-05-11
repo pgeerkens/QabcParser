@@ -1,7 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////
 //                  Q - A B C   S O U N D   P L A Y E R
 //
-//                   Copyright (C) Pieter Geerkens 2012
+//                   Copyright (C) Pieter Geerkens 2012-2016
 ////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
@@ -68,12 +68,12 @@ namespace System.Windows.Forms {
 	}
 
 }
-namespace  PGSoftwareSolutionsInc.Util {
+namespace PGSoftwareSolutions.Util {
 	/// <summary>
 	/// Generic thread-safe event-raisers
 	/// </summary>
 	/// <see href="http://blog.quantumbitdesigns.com/tag/events/"/>
-	public static class EventExtensions {
+	internal static class EventExtensions {
 		/// <summary>Generic thread-safe event-raiser.</summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="eventHandler"></param>
@@ -83,7 +83,8 @@ namespace  PGSoftwareSolutionsInc.Util {
 		[MethodImpl(MethodImplOptions.NoInlining)]
  		public static void RaiseEvent<T>(this EventHandler<T> eventHandler, object sender, T e) 
 		where T : EventArgs {
-			if (eventHandler != null) { eventHandler(sender, e); }
+		//	if (eventHandler != null) { eventHandler(sender, e); }
+            eventHandler?.Invoke(sender,e);
 		}
 		/// <summary>Thread-safe event-raiser.</summary>
 		/// <param name="eventHandler"></param>
@@ -92,12 +93,13 @@ namespace  PGSoftwareSolutionsInc.Util {
 		/// <see href="http://blog.quantumbitdesigns.com/tag/events/"/>
 		[MethodImpl(MethodImplOptions.NoInlining)]
  		public static void RaiseEvent(this EventHandler eventHandler, object sender, EventArgs e) {
-			if (eventHandler != null) { eventHandler(sender, e); }
-		}
-	}
+			//if (eventHandler != null) { eventHandler(sender, e); }
+            eventHandler?.Invoke(sender, e);
+        }
+    }
 
     /// <summary>TODO</summary>
-	public static class Utils {
+	internal static class Utils {
 		/// <summary>Returns all the extension methods for a type available to a specified assembly.</summary>
 		/// <param name="assembly"></param>
 		/// <param name="extType"></param>

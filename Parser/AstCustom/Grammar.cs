@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using Irony.Ast;
 using Irony.Parsing;
 
-namespace PGSoftwareSolutionsInc.PGIrony {
+namespace PGSoftwareSolutions.PGIrony {
 	/// <summary>A subclass of Irony.Grammar providien additional boilerplate to ease construction of
 	/// AST's and List NonTerminals.</summary>
 	/// <typeparam name="TContext">The AstContext to be used in construction and walking of the AST tree.</typeparam>

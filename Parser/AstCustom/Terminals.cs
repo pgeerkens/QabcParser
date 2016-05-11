@@ -11,7 +11,7 @@ using System;
 
 using Irony.Parsing;
 
-namespace PGSoftwareSolutionsInc.PGIrony {
+namespace PGSoftwareSolutions.PGIrony {
 	/// <summary>A typed integer literal with the NumberOptions AllowLetterAfter and IntOnly set automatically.</summary>
 	/// <typeparam name="TValue">The type of the literal; one of byte, sbyte, int16, etc.</typeparam>
 	public class MusicIntegerLiteral<TValue> : NumberLiteral {

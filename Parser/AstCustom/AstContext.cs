@@ -12,7 +12,7 @@ using System;
 using Irony.Ast;
 using Irony.Parsing;
 
-namespace PGSoftwareSolutionsInc.PGIrony {
+namespace PGSoftwareSolutions.PGIrony {
 	/// <summary>Ensures that the default AST node-types can all be created.</summary>
 	public class AstContext : Irony.Ast.AstContext {
 	/// <summary>Sets the default Node builders used by BuildAst.</summary>

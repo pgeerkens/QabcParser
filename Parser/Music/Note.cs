@@ -1,13 +1,13 @@
 ﻿////////////////////////////////////////////////////////////////////////
 //                  Q - A B C   S O U N D   P L A Y E R
 //
-//                   Copyright (C) Pieter Geerkens 2012
+//                   Copyright (C) Pieter Geerkens 2012-2016
 ////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PGSoftwareSolutionsInc.Music {
+namespace PGSoftwareSolutions.Music {
   /// <summary>TODO</summary>
 	public interface INoteLength {
     /// <summary>TODO</summary>

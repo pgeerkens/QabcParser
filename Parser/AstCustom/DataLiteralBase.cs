@@ -14,7 +14,7 @@ using System.Text;
 
 using Irony.Parsing;
 
-namespace PGSoftwareSolutionsInc.PGIrony {
+namespace PGSoftwareSolutions.PGIrony {
 
 	//DataLiteralBase is a base class for a set of specialized terminals with a primary purpose of building data readers
 	// DsvLiteral is used for reading delimiter-separated values (DSV), comma-separated format is a specific case of DSV

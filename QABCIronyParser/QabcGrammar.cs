@@ -57,6 +57,7 @@ namespace PGSoftwareSolutionsInc.Qabc {
             var musicLine       = new TransientNonTerminal("musicLine");
             var musicBar        = new TypedNonTerminal<MusicBarAstNode>();
             var beam            = new TypedNonTerminal<BeamAstNode>();
+            var bar             = new TransientNonTerminal("bar");
 
             var music           = new TransientNonTerminal("music");
             var direction       = new TransientNonTerminal("direction");
@@ -101,13 +102,8 @@ namespace PGSoftwareSolutionsInc.Qabc {
             musicLine.Rule      = MakePlusList<QabcAstNode>(musicBar)
                                 | WhiteSpace + musicLine;
 
-        #if InferBarAtEndOfLine
-            var bar             = new TransientNonTerminal("bar");
             musicBar.Rule       = MakePlusList<MusicBarAstNode>(music) + bar;
             bar.Rule            = Bar | NewLine;
-        #else
-            musicBar.Rule       = MakePlusList<MusicBarAstNode>(music) + (Bar | NewLine);
-        #endif
             music.Rule          = direction
                                 | beam
                                 | music + WhiteSpace
@@ -167,23 +163,19 @@ namespace PGSoftwareSolutionsInc.Qabc {
                 );
             #endregion 4-Color Highlighting
 
-#region Clear shift-reduce conflicts
-#if ClearConflict_1
+            #region Clear shift-reduce conflicts
             RegisterOperators(10, Associativity.Right, Length);
             RegisterOperators(10, Associativity.Right, Mode);
             RegisterOperators(10, Associativity.Right, Tempo);
             RegisterOperators(10, Associativity.Right, Octave);
             RegisterOperators(10, Associativity.Right, Shift);
             RegisterOperators(10, Associativity.Right, ModePlay);
-#endif
-#if ClearConflict_2
             RegisterOperators(10, Associativity.Right, Note);
             RegisterOperators(10, Associativity.Right, NoteLetter);
             RegisterOperators(10, Associativity.Right, Rest);
-#endif
-#endregion
+            #endregion
 
-        #if EliminateMusicList
+        #if !EliminateMusicList
             MarkTransient(tune);
         #endif
             LanguageFlags = LanguageFlags.CreateAst | LanguageFlags.NewLineBeforeEOF;

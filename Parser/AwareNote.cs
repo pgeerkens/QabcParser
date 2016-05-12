@@ -11,16 +11,16 @@ using PGSoftwareSolutions.Music;
 
 namespace PGSoftwareSolutions.Qabc {
 	public interface IAwareNote : INote {
-		Int32 SpanPosition	{ get; }
-		Int32 SpanLength	{ get; }
-		Int32 SpanEndPos	{ get; }
+		int SpanPosition	{ get; }
+        int SpanLength	    { get; }
+        int SpanEndPos	    { get; }
 	}
 
 	public class AwareNote : Note, IAwareNote {
-		public Int32 SpanPosition	{ get; private set; }
-		public Int32 SpanLength		{ get; private set; }
-		public Int32 SpanEndPos		{ get; private set; }
-		#region Note Factory
+		public int SpanPosition	{ get; private set; }
+		public int SpanLength   { get; private set; }
+		public int SpanEndPos   { get; private set; }
+
 		public static AwareNote GetAwareNote(NoteLetter letter, PianoKey noteNum, SharpFlat accid, 
 								NoteLength length, Style style, Int16 tempo, Int16 energy, SourceSpan span) {
 			return new AwareNote(letter, noteNum, accid, length, style, tempo, energy, span);
@@ -32,6 +32,5 @@ namespace PGSoftwareSolutions.Qabc {
 			SpanLength		= span.Length;
 			SpanEndPos		= span.EndPosition;
 		}
-		#endregion Note Factory
 	}
 }

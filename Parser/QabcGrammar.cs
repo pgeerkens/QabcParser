@@ -1,7 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////
 //                  Q - A B C   S O U N D   P L A Y E R
 //
-//                   Copyright (C) Pieter Geerkens 2012-2016
+//                   Copyright (C) Pieter Geerkens 2012-2016-2016
 ////////////////////////////////////////////////////////////////////////
 //#define KeySpec
 using System;
@@ -22,20 +22,20 @@ namespace PGSoftwareSolutions.Qabc {
             #region 1-Terminals
             #region Directions
             var Bar             = new RegexBasedTerminalX("Bar", @":?[|][1-9:\]]?");
-            var Mode            = new MyKeyTerm("M", "Mode");
-            var ModeStyle       = new RegexEnumTerm<Style>(@"[NLS]");
-            var Length          = new MyKeyTerm("L", "Length");
-            var Octave          = new MyKeyTerm("O", "Octave");
-            var Tempo           = new MyKeyTerm("T", "Tempo");
+            var Mode            = new KeyTermX("M", "Mode");
+            var ModeStyle       = new RegexTerm<Style>(@"[NLS]",Style.ConvertValue);
+            var Length          = new KeyTermX("L", "Length");
+            var Octave          = new KeyTermX("O", "Octave");
+            var Tempo           = new KeyTermX("T", "Tempo");
             var Integer         = new MusicIntegerLiteral<Byte>("Integer");
             var Shift           = new RegexEnumTerm<OctaveShift>(@"O?[<>]",
-                                            s => Music.OctaveShift.Up.FromString(s));
+                                        s => Music.OctaveShift.Up.FromString(s));
             var ModePlay        = new RegexBasedTerminalX("ModePlay", @"M[BF]");
             #endregion Directions
 
             #region Notes
-            var Note            = new MyKeyTerm("N", "Note");
-            var Rest            = new MyKeyTerm("P", "Rest");
+            var Note            = new KeyTermX("N", "Note");
+            var Rest            = new KeyTermX("P", "Rest");
             var NoteLetter      = new RegexEnumTerm<NoteLetter>(@"[CDEFGABcdefgab]",
                                             s => Music.NoteLetter.C.Parse(s));
             var Dot             = ToTerm(".");
@@ -47,7 +47,7 @@ namespace PGSoftwareSolutions.Qabc {
             var WhiteSpace      = new RegexBasedTerminalX("WhiteSpace", @"[ \t]+");
             #endregion 1-Terminals
 
-            MarkPunctuation(ModePlay);        // obsolete instruction - recognize & discard
+            MarkPunctuation(ModePlay);    // obsolete instruction - recognize & discard
             MarkPunctuation(NewLine, WhiteSpace, Length, Mode, Octave, Tempo);
 
             #region 2-Nonterminals

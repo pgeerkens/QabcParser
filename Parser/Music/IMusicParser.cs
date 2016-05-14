@@ -1,13 +1,17 @@
 ﻿////////////////////////////////////////////////////////////////////////
 //                  Q - A B C   S O U N D   P L A Y E R
 //
-//                   Copyright (C) Pieter Geerkens 2012-2016
+//                   Copyright (C) Pieter Geerkens 2012-2016-2016
 ////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+
+using Irony.Parsing;
+
+using PGSoftwareSolutions.PGIrony;
 
 namespace PGSoftwareSolutions.Music {
     /// <summary>TODO</summary>
@@ -65,25 +69,47 @@ namespace PGSoftwareSolutions.Music {
 	#pragma warning restore
 
     /// <summary>Play styles</summary>
-	public enum Style {
+    public struct Style  {
         /// <summary>Legato</summary>
-		L, // Legato
+        public static Style L => new Style(_enum.L, "Legato",   0.950F);
         /// <summary>Normal</summary>
-		N, // Normal
+        public static Style N => new Style(_enum.N, "Normal",   0.875F);
         /// <summary>Staccato</summary>
-		S, // Staccato
-	} 
+        public static Style S => new Style(_enum.S, "Staccato", 0.750F);
+
+        /// <summary>TODO</summary>
+        public static Style ConvertValue(ParsingContext c, string s) =>
+            _values[(int)(System.Enum.Parse(typeof(_enum), s.ToUpper()))];
+
+        private enum _enum {L,N,S};
+        private static IList<Style> _values = new List<Style> { L, N, S };
+
+        private Style(_enum value, string name, double factor) :this() {
+            _value  = (int)value;
+            _name   = name;
+            _factor = factor;
+        }
+        /// <summary>TODO</summary>
+        public int    Value  { get { return _value;  } } readonly int    _value;
+        /// <summary>TODO</summary>
+        public string Name   { get { return _name;   } } readonly string _name;
+        /// <summary>TODO</summary>
+        public double Factor { get { return _factor; } } readonly double _factor;
+
+        /// <summary>TODO</summary>
+        public double Length(double seconds) => seconds * _factor;
+    }
 
     /// <summary>TODO</summary>
 	public enum SharpFlat {
     /// <summary>TODO</summary>
-		FlatFlat		= -2,
+		FlatFlat	= -2,
     /// <summary>TODO</summary>
-		Flat			= -1,
+		Flat		= -1,
     /// <summary>TODO</summary>
 		Natural		=  0,
     /// <summary>TODO</summary>
-		Sharp			= +1,
+		Sharp		= +1,
     /// <summary>TODO</summary>
 		SharpSharp	= +2		// "\uD834\uDD2A" or U+1D12A
 	}
@@ -117,22 +143,6 @@ namespace PGSoftwareSolutions.Music {
 
     /// <summary>TODO</summary>
     public static class EnumExtensions {
-		#region Style extensions
-    /// <summary>TODO</summary>
-		public static double Length(this Style style, double length) {
-			switch (style) {
-				case Style.L:	return length * 0.950; // Any greater messes up midi timing.
-				case Style.N:	return length * 0.875;
-				case Style.S:	return length * 0.750;
-				default:			return length * 0.875;
-			}
-		}
-    /// <summary>TODO</summary>
-		public static string AsString(this Style style) {
-			return (new string[] {"Legato", "Normal", "Staccato"})[(int)style];
-		}
-		#endregion Style extensions
-
 		#region SharpFlat extensions
     /// <summary>TODO</summary>
 		public static SharpFlat Parse(this SharpFlat sharpFlat, string s) {

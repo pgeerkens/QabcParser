@@ -1,7 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////
 //                  Q - A B C   S O U N D   P L A Y E R
 //
-//                   Copyright (C) Pieter Geerkens 2012-2016
+//                   Copyright (C) Pieter Geerkens 2012-2016-2016
 ////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
@@ -13,10 +13,10 @@ namespace PGSoftwareSolutions.Music {
 	public struct Notes { //: List<INote>, INotes{
     /// <summary>TODO</summary>
 		public static void Init() {
-			Tempo		= 120;			// range: [32,255] quarter notes per minute
-			Length	= 4;				// range: [ 1, 64] semi-breve to hemi-demi-semi-quaver
-			Octave	= 4;				// range: [ 0,  6]
-			Style		= Style.N;		// Normal, Legato, and Staccato supported
+			Tempo	= 120;			// range: [32,255] quarter notes per minute
+			Length	= 4;			// range: [ 1, 64] semi-breve to hemi-demi-semi-quaver
+			Octave	= 4;			// range: [ 0,  6]
+			Style	= Style.N;		// Normal, Legato, and Staccato supported
 		} 
 		private static void ValidateField(string field, byte lower, byte upper, byte value) {
 			if (value < lower || value > upper) 
@@ -68,8 +68,8 @@ namespace PGSoftwareSolutions.Music {
     /// <summary>TODO</summary>
 	public struct Notes2 {
 		private byte		_tempo;		// range: [32,255] quarter notes per minute
-		private byte		_length;		// range: [ 1, 64] semi-breve to hemi-demi-semi-quaver
-		private byte		_octave;		// range: [ 0,  6]
+		private byte		_length;	// range: [ 1, 64] semi-breve to hemi-demi-semi-quaver
+		private byte		_octave;	// range: [ 0,  6]
 		private Style		_style;		// Normal, Legato, and Staccato supported
 
     /// <summary>TODO</summary>

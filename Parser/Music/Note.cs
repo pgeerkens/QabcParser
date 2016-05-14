@@ -1,7 +1,7 @@
 ﻿////////////////////////////////////////////////////////////////////////
 //                  Q - A B C   S O U N D   P L A Y E R
 //
-//                   Copyright (C) Pieter Geerkens 2012-2016
+//                   Copyright (C) Pieter Geerkens 2012-2016-2016
 ////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
@@ -99,9 +99,9 @@ namespace PGSoftwareSolutions.Music {
 		private Double			_lengthSeconds;	// length in seconds of a whole note
 
     /// <summary>TODO</summary>
-		public INoteLength	Length			{ get { return _length;								} }
+		public INoteLength	Length			    { get { return _length;								} }
     /// <summary>TODO</summary>
-		public Double			Duration			{ get { return _style.Length(LengthSeconds);	} } 
+		public Double			Duration		{ get { return _style.Length(LengthSeconds);	} } 
     /// <summary>TODO</summary>
 		public Double			LengthSeconds	{ get { return _length.Time(_tempo);			} } 
     /// <summary>TODO</summary>
@@ -115,7 +115,7 @@ namespace PGSoftwareSolutions.Music {
     /// <summary>TODO</summary>
 		public SharpFlat		SharpFlat		{ get { return _sharpFlat;							} }
     /// <summary>TODO</summary>
-		public Style			Style				{ get { return _style;								} }
+		public Style			Style			{ get { return _style;								} }
 
 		/// <summary>TODO</summary>
 		///// <param name="noteNum">1 = A0; 49 = A4; 88 = C8; 0 = rest</param>

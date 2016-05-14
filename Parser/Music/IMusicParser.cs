@@ -220,7 +220,7 @@ namespace PGSoftwareSolutions.Music {
 		}
 		/// <summary>TODO</summary>
 		public static int NoteIndex (this NoteLetter note) {
-			return "CDEFGABcdefgab".IndexOf(note.ToString());
+			return "CDEFGAB".IndexOf(note.ToString().ToUpper());
 		}
 		#endregion
 

@@ -154,12 +154,12 @@ namespace PGSoftwareSolutions.Qabc {
 
             #region 4-Color Highlighting
             SetHighlighting(
-                new List<Terminal>() {ModePlay},
+                new List<Terminal>() {ModePlay, Bar},
                 new List<Terminal>() {Note},
                 new List<Terminal>() {Rest},
-                new List<Terminal>() {Mode, ModeStyle},
+                new List<Terminal>() {Mode, ModeStyle, Length, Tempo, Octave, Shift },
                 new List<Terminal>() {NoteLetter,SharpFlat,Dot,Integer},
-                new List<Terminal>() {Tempo,Length,Octave,Shift}
+                new List<Terminal>() {}
                 );
             #endregion 4-Color Highlighting
 

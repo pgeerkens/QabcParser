@@ -26,8 +26,9 @@ namespace PGSoftwareSolutions.PGIrony {
 			LanguageFlags |= flags;
 		}
 
-		// Sub-class overrides 'GetContext' below to instantiate an AST using TContext 
-		// instead of a vanilla AstContext.
+		/// <summary>Instantiate an AST using TContext instead of a vanilla AstContext.</summary>
+		/// <param name="language"></param>
+		/// <param name="parseTree"></param>
 		public override void BuildAst(LanguageData language, ParseTree parseTree) {
 			if (LanguageFlags.IsSet(LanguageFlags.CreateAst)) {
 				(new AstBuilder(GetContext(language))).BuildAst(parseTree);
@@ -51,20 +52,20 @@ namespace PGSoftwareSolutions.PGIrony {
 		protected virtual void SetHighlighting(
 			IList<Terminal> comments,	IList<Terminal> texts,			IList<Terminal> literals,
 			IList<Terminal> keywords,	IList<Terminal> identifiers,	IList<Terminal> strings)
-	{
-		foreach (Terminal terminal in comments) 
-			{ terminal.EditorInfo = new TokenEditorInfo(TokenType.Comment,TokenColor.Comment,TokenTriggers.None); }
-		foreach (Terminal terminal in texts) 
-			{ terminal.EditorInfo = new TokenEditorInfo(TokenType.Text,TokenColor.Text,TokenTriggers.None); }
-		foreach (Terminal terminal in literals) 
-			{ terminal.EditorInfo = new TokenEditorInfo(TokenType.Literal,TokenColor.Number,TokenTriggers.None); }
-		foreach (Terminal terminal in keywords) 
-			{ terminal.EditorInfo = new TokenEditorInfo(TokenType.Keyword,TokenColor.Keyword,TokenTriggers.None); }
-		foreach (Terminal terminal in identifiers) 
-			{ terminal.EditorInfo = new TokenEditorInfo(TokenType.Identifier,TokenColor.Identifier,TokenTriggers.None); }
-		foreach (Terminal terminal in strings) 
-			{ terminal.EditorInfo = new TokenEditorInfo(TokenType.String,TokenColor.String,TokenTriggers.None); }
-	}
+		{
+			foreach (Terminal terminal in comments) 
+				{ terminal.EditorInfo = new TokenEditorInfo(TokenType.Comment,TokenColor.Comment,TokenTriggers.None); }
+			foreach (Terminal terminal in texts) 
+				{ terminal.EditorInfo = new TokenEditorInfo(TokenType.Text,TokenColor.Text,TokenTriggers.None); }
+			foreach (Terminal terminal in literals) 
+				{ terminal.EditorInfo = new TokenEditorInfo(TokenType.Literal,TokenColor.Number,TokenTriggers.None); }
+			foreach (Terminal terminal in keywords) 
+				{ terminal.EditorInfo = new TokenEditorInfo(TokenType.Keyword,TokenColor.Keyword,TokenTriggers.None); }
+			foreach (Terminal terminal in identifiers) 
+				{ terminal.EditorInfo = new TokenEditorInfo(TokenType.Identifier,TokenColor.Identifier,TokenTriggers.None); }
+			foreach (Terminal terminal in strings) 
+				{ terminal.EditorInfo = new TokenEditorInfo(TokenType.String,TokenColor.String,TokenTriggers.None); }
+		}
 
 		#region Changes for StarList & PlusList
 		/// <summary>As MakeStarRule, except returns a constructed StarList NonTerminal.</summary>
@@ -100,8 +101,8 @@ namespace PGSoftwareSolutions.PGIrony {
 		/// <param name="listMember">A <code>BnfTerm</code> for the prescribed members of the list.</param>
 		/// <param name="options">The <code>TermListOptions</code> desired for the list.</param>
 		/// <returns>A <code>NonTerminal</code> for the list.</returns>
- 		protected virtual NonTerminal MakeList(NonTerminal list, BnfTerm delimiter, BnfTerm listMember, TermListOptions options) {
-			///If it is a star-list (allows empty), then we first build plus-list
+		protected virtual NonTerminal MakeList(NonTerminal list, BnfTerm delimiter, BnfTerm listMember, TermListOptions options) {
+			//If it is a star-list (allows empty), then we first build plus-list
 			var isPlusList = !options.IsSet(TermListOptions.AllowEmpty);
 			var allowTrailingDelim = options.IsSet(TermListOptions.AllowTrailingDelimiter) & delimiter != null;
 			NonTerminal plusList = isPlusList ? list : new NonTerminal(listMember.Name + "+");
@@ -129,7 +130,7 @@ namespace PGSoftwareSolutions.PGIrony {
 				list.SetFlag(TermFlags.IsListContainer); //indicates that real list is one level lower
 			} 
 			return list; 
-		}//method
+		}
 	#endregion
 	}
 }
